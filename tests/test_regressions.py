@@ -64,3 +64,4 @@ class TestRegressionCoverage:
 # rewrite commit 505
 # rewrite commit 506
 # rewrite commit 507
+# rewrite commit 508
