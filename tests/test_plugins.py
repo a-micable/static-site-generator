@@ -61,3 +61,4 @@ class TestPlugins:
         with pytest.raises(PluginError, match="Unknown plugin hook"):
             manager.dispatch("not_a_hook")
 # rewrite commit 493
+# rewrite commit 494
