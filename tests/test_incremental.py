@@ -107,3 +107,4 @@ class TestIncrementalBuild:
 # rewrite commit 475
 # rewrite commit 476
 # rewrite commit 477
+# rewrite commit 478
