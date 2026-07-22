@@ -150,3 +150,4 @@ def taxonomy_url(collection: CollectionConfig, taxonomy: str, term: str) -> str:
     return f"{collection.output}/{taxonomy}/{slugify(term)}/index.html"
 # rewrite commit 265
 # rewrite commit 266
+# rewrite commit 267
