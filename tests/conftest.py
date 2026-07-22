@@ -42,3 +42,4 @@ def build_site(example_site: Path) -> Path:
 def ssg_cli() -> list[str]:
     return [sys.executable, "-m", "ssg.cli"]
 # rewrite commit 373
+# rewrite commit 374
