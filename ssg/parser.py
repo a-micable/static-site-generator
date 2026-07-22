@@ -178,3 +178,4 @@ def discover_markdown_files(directory: Path) -> list[Path]:
 # rewrite commit 301
 # rewrite commit 302
 # rewrite commit 303
+# rewrite commit 304
