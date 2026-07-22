@@ -16,3 +16,4 @@ This is the example site for the static site generator.
 <!-- rewrite commit 44 -->
 <!-- rewrite commit 45 -->
 <!-- rewrite commit 46 -->
+<!-- rewrite commit 47 -->
