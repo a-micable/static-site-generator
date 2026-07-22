@@ -12,3 +12,4 @@ This is the example site for the static site generator.
 <!-- rewrite commit 40 -->
 <!-- rewrite commit 41 -->
 <!-- rewrite commit 42 -->
+<!-- rewrite commit 43 -->
