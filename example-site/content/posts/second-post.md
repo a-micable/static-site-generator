@@ -21,3 +21,4 @@ Second post demonstrating tags and pagination.
 <!-- rewrite commit 69 -->
 <!-- rewrite commit 70 -->
 <!-- rewrite commit 71 -->
+<!-- rewrite commit 72 -->
