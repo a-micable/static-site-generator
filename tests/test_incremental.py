@@ -100,3 +100,4 @@ class TestIncrementalBuild:
         assert cache.is_file()
 # rewrite commit 469
 # rewrite commit 470
+# rewrite commit 471
