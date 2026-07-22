@@ -48,3 +48,4 @@ def write_search_index(output_path: Path, pages: Sequence[Page], base_url: str) 
     output_path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
 # rewrite commit 337
 # rewrite commit 338
+# rewrite commit 339
