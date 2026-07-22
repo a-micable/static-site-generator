@@ -1,0 +1,25 @@
+title: Example Site
+base_url: https://example.com
+description: An example site built with SSG
+language: en
+author: Example Author
+search_index: true
+taxonomies:
+  - tags
+  - categories
+output_dir: dist
+content_dir: content
+templates_dir: templates
+assets_dir: assets
+feed_items: 10
+collections:
+  posts:
+    path: posts
+    output: posts
+    sort_by: date
+    sort_order: desc
+    per_page: 2
+    layout: post.html
+    archive: true
+    tags: true
+# rewrite commit 85
