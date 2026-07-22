@@ -57,3 +57,4 @@ def write_sitemap(output_path: Path, base_url: str, pages: Sequence[Page]) -> No
 # rewrite commit 353
 # rewrite commit 354
 # rewrite commit 355
+# rewrite commit 356
