@@ -57,3 +57,4 @@ class TestAssets:
 # rewrite commit 403
 # rewrite commit 404
 # rewrite commit 405
+# rewrite commit 406
