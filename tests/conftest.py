@@ -50,3 +50,4 @@ def ssg_cli() -> list[str]:
 # rewrite commit 379
 # rewrite commit 380
 # rewrite commit 381
+# rewrite commit 382
