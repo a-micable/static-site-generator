@@ -256,3 +256,4 @@ def default_config_dict() -> dict[str, Any]:
 # rewrite commit 257
 # rewrite commit 258
 # rewrite commit 259
+# rewrite commit 260
