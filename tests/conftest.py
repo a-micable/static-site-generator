@@ -43,3 +43,4 @@ def ssg_cli() -> list[str]:
     return [sys.executable, "-m", "ssg.cli"]
 # rewrite commit 373
 # rewrite commit 374
+# rewrite commit 375
