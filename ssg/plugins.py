@@ -99,3 +99,4 @@ class PluginManager:
 # rewrite commit 317
 # rewrite commit 318
 # rewrite commit 319
+# rewrite commit 320
