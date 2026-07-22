@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "static-site-generator"
+version = "1.0.0"
+description = "Production-grade Python static site generator"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Amicable" }]
+keywords = ["static-site-generator", "markdown", "jinja2", "ssg"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+]
+dependencies = [
+    "Jinja2>=3.1.0",
+    "Markdown>=3.5.0",
+    "PyYAML>=6.0",
+    "watchdog>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2.0",
+    "mypy>=1.10.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.5.0",
+]
+
+[project.scripts]
+ssg = "ssg.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ssg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["ssg"]
+branch = true
+patch = ["subprocess"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["ssg"]
+warn_unused_ignores = true
+warn_return_any = true
+disallow_untyped_defs = true
