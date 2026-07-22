@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+  {% for page in pages %}
+  <li><a href="{{ site.base_url }}/{{ page.url.replace('index.html', '') }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+{% if total_pages > 1 %}
+<nav class="pagination">
+  {% if page_num > 1 %}<a href="{{ site.base_url }}/posts/{% if page_num > 2 %}page/{{ page_num - 1 }}/{% endif %}">Previous</a>{% endif %}
+  <span>Page {{ page_num }} of {{ total_pages }}</span>
+  {% if page_num < total_pages %}<a href="{{ site.base_url }}/posts/page/{{ page_num + 1 }}/">Next</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}
+<!-- rewrite commit 121 -->
