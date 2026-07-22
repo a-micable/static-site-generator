@@ -176,3 +176,4 @@ def discover_markdown_files(directory: Path) -> list[Path]:
         return []
     return sorted(directory.rglob("*.md"))
 # rewrite commit 301
+# rewrite commit 302
