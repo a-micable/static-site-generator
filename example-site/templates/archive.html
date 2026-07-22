@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Archive</h1>
+<ul>
+  {% for page in pages %}
+  <li>
+    {% if page.date %}<time>{{ page.date.strftime('%Y-%m-%d') }}</time> — {% endif %}
+    <a href="{{ site.base_url }}/{{ page.url.replace('index.html', '') }}">{{ page.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+<!-- rewrite commit 97 -->
