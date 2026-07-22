@@ -69,3 +69,4 @@ class TestContentIndex:
 
         assert actual == golden
 # rewrite commit 445
+# rewrite commit 446
