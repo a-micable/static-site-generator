@@ -113,3 +113,4 @@ def resolve_asset_url(original: str, manifest: AssetManifest) -> str:
         return manifest.mappings[normalized]
     return original
 # rewrite commit 217
+# rewrite commit 218
