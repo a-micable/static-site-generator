@@ -51,3 +51,4 @@ def write_sitemap(output_path: Path, base_url: str, pages: Sequence[Page]) -> No
     output_path.write_text(xml, encoding="utf-8")
     logger.info("Wrote sitemap: %s (%d URLs)", output_path, len(pages))
 # rewrite commit 349
+# rewrite commit 350
