@@ -32,3 +32,4 @@ class PluginError(SSGError):
 # rewrite commit 283
 # rewrite commit 284
 # rewrite commit 285
+# rewrite commit 286
