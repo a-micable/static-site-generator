@@ -1,0 +1,6 @@
+body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+header nav a { margin-right: 1rem; }
+.tags { list-style: none; padding: 0; display: flex; gap: 0.5rem; }
+.tags li { background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.pagination { margin-top: 2rem; }
+// rewrite commit 25
