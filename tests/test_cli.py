@@ -95,3 +95,4 @@ class TestCLI:
         assert data["content"]["collections"] == {"posts": 3}
         assert data["content"]["taxonomies"]["categories"]["releases"] == 2
 # rewrite commit 421
+# rewrite commit 422
