@@ -123,3 +123,4 @@ def resolve_asset_url(original: str, manifest: AssetManifest) -> str:
 # rewrite commit 225
 # rewrite commit 226
 # rewrite commit 227
+# rewrite commit 228
