@@ -16,3 +16,4 @@ Second post demonstrating tags and pagination.
 <!-- rewrite commit 64 -->
 <!-- rewrite commit 65 -->
 <!-- rewrite commit 66 -->
+<!-- rewrite commit 67 -->
