@@ -91,3 +91,4 @@ def write_feed(
     output_path.write_text(xml, encoding="utf-8")
     logger.info("Wrote RSS feed: %s", output_path)
 # rewrite commit 289
+# rewrite commit 290
