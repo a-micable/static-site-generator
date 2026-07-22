@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ title }}{% endblock %} | {{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="alternate" type="application/rss+xml" href="{{ site.base_url }}/feed.xml">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header>
+    <h1><a href="{{ site.base_url }}/">{{ site.title }}</a></h1>
+    <nav>
+      <a href="{{ site.base_url }}/">Home</a>
+      <a href="{{ site.base_url }}/posts/">Posts</a>
+      <a href="{{ site.base_url }}/posts/archive/">Archive</a>
+      <a href="{{ site.base_url }}/posts/tags/">Tags</a>
+      <a href="{{ site.base_url }}/posts/categories/">Categories</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>&copy; {{ site.author }} — Built with SSG</p>
+  </footer>
+</body>
+</html>
+<!-- rewrite commit 109 -->
