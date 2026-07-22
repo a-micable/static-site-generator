@@ -62,3 +62,4 @@ class TestPlugins:
             manager.dispatch("not_a_hook")
 # rewrite commit 493
 # rewrite commit 494
+# rewrite commit 495
