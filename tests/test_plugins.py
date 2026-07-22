@@ -67,3 +67,4 @@ class TestPlugins:
 # rewrite commit 497
 # rewrite commit 498
 # rewrite commit 499
+# rewrite commit 500
