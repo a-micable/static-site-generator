@@ -50,3 +50,4 @@ class TestAssets:
         assert old_name in [p.name for p in (example_site / "dist" / "assets").glob("style.*.css")]
 # rewrite commit 397
 # rewrite commit 398
+# rewrite commit 399
