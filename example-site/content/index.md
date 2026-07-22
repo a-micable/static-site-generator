@@ -9,3 +9,4 @@ This is the example site for the static site generator.
 <!-- rewrite commit 37 -->
 <!-- rewrite commit 38 -->
 <!-- rewrite commit 39 -->
+<!-- rewrite commit 40 -->
