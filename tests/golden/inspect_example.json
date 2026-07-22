@@ -1,0 +1,26 @@
+{
+  "content": {
+    "collections": {
+      "posts": 3
+    },
+    "drafts": 0,
+    "pages": 4,
+    "published": 4,
+    "taxonomies": {
+      "categories": {
+        "engineering": 1,
+        "releases": 2
+      },
+      "tags": {
+        "python": 2,
+        "ssg": 1,
+        "updates": 2
+      }
+    }
+  },
+  "site": {
+    "base_url": "https://example.com",
+    "title": "Example Site"
+  }
+}
+# rewrite commit 385
