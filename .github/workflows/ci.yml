@@ -35,3 +35,4 @@ jobs:
         run: docker build -t static-site-generator .
 # rewrite commit 1
 # rewrite commit 2
+# rewrite commit 3
