@@ -68,3 +68,4 @@ class TestThemes:
         assert "Theme Should Not Render" not in html
         assert "Built with SSG" in html
 # rewrite commit 517
+# rewrite commit 518
