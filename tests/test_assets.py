@@ -49,3 +49,4 @@ class TestAssets:
         assert len(js_files) == 1
         assert old_name in [p.name for p in (example_site / "dist" / "assets").glob("style.*.css")]
 # rewrite commit 397
+# rewrite commit 398
