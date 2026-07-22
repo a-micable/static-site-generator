@@ -151,3 +151,4 @@ def taxonomy_url(collection: CollectionConfig, taxonomy: str, term: str) -> str:
 # rewrite commit 265
 # rewrite commit 266
 # rewrite commit 267
+# rewrite commit 268
