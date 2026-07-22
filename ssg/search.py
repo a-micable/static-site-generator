@@ -56,3 +56,4 @@ def write_search_index(output_path: Path, pages: Sequence[Page], base_url: str) 
 # rewrite commit 344
 # rewrite commit 345
 # rewrite commit 346
+# rewrite commit 347
