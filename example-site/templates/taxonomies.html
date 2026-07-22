@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ taxonomy | title }}</h1>
+<ul>
+  {% for term in terms %}
+  <li><a href="{{ site.base_url }}/{{ collection.output }}/{{ taxonomy }}/{{ term | lower | replace(' ', '-') }}/">{{ term }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
+<!-- rewrite commit 181 -->
