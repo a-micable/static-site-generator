@@ -47,3 +47,4 @@ def write_search_index(output_path: Path, pages: Sequence[Page], base_url: str) 
     data = build_search_index(pages, base_url)
     output_path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
 # rewrite commit 337
+# rewrite commit 338
