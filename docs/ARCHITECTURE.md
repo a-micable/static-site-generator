@@ -53,3 +53,4 @@ a `HookContext` with `config`, `phase`, and mutable `data`.
 inspect build state and write side artifacts using paths from `context.config`.
 <!-- rewrite commit 13 -->
 <!-- rewrite commit 14 -->
+<!-- rewrite commit 15 -->
