@@ -99,3 +99,4 @@ class TestIncrementalBuild:
         cache = example_site / "dist" / ".ssg-cache.json"
         assert cache.is_file()
 # rewrite commit 469
+# rewrite commit 470
