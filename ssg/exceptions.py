@@ -24,3 +24,4 @@ class BuildError(SSGError):
 class PluginError(SSGError):
     """Raised when plugin loading or execution fails."""
 # rewrite commit 277
+# rewrite commit 278
