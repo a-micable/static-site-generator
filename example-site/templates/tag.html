@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Posts tagged &ldquo;{{ tag }}&rdquo;</h1>
+<ul>
+  {% for page in pages %}
+  <li><a href="{{ site.base_url }}/{{ page.url.replace('index.html', '') }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
+<!-- rewrite commit 157 -->
