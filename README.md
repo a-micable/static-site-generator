@@ -162,9 +162,46 @@ docker run --rm ssg build
 
 The Docker image includes the example site and runs `ssg build` by default.
 
+## React Dashboard
+
+The repository root contains a React + Vite dashboard that controls the Python SSG engine via a JSON API.
+
+### Setup
+
+```bash
+npm install
+pip install -e ".[dev]"
+```
+
+### Development
+
+Run the API server and Vite dev server in separate terminals:
+
+```bash
+npm run server -- example-site
+npm run dev
+```
+
+Open http://127.0.0.1:5173/ for the dashboard. Vite proxies `/api` requests to the Python server on port 8765.
+
+### Dashboard features
+
+- **Live Markdown Editor** — edit posts with instant HTML preview
+- **Site Config Editor** — update `ssg.yaml` settings
+- **Collection Browser** — browse posts, tags, and categories
+- **Build Dashboard** — run and monitor site builds
+- **Search Index Viewer** — inspect and filter `search.json`
+
+### Frontend tests and build
+
+```bash
+npm test
+npm run build
+```
+
 ## Development
 
-Run tests:
+Run Python tests:
 
 ```bash
 pip install -e ".[dev]"
@@ -172,6 +209,21 @@ pytest
 pytest --cov=ssg --cov-report=term-missing
 ruff check .
 mypy ssg
+```
+
+Run all tests:
+
+```bash
+pytest
+npm test
+```
+
+## Minerva issue
+
+See `MINERVA_ISSUE.md` for the Markdown preview bug report. Apply the minimal fix with:
+
+```bash
+git apply fix.patch
 ```
 
 ## License

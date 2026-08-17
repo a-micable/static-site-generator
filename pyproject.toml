@@ -46,6 +46,7 @@ include = ["ssg*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+python_files = ["test_*.py", "*_test.py"]
 addopts = "-v --tb=short"
 
 [tool.coverage.run]

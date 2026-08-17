@@ -46,15 +46,4 @@ def write_search_index(output_path: Path, pages: Sequence[Page], base_url: str) 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     data = build_search_index(pages, base_url)
     output_path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
-# rewrite commit 337
-# rewrite commit 338
-# rewrite commit 339
-# rewrite commit 340
-# rewrite commit 341
-# rewrite commit 342
-# rewrite commit 343
-# rewrite commit 344
-# rewrite commit 345
-# rewrite commit 346
-# rewrite commit 347
-# rewrite commit 348
+
