@@ -9,8 +9,10 @@ interface MarkdownEditorProps {
 
 export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
+  const [filename, setFilename] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [previewHtml, setPreviewHtml] = useState("");
+  const [previewVisible, setPreviewVisible] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,11 +34,12 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
 
   const handleSelectPost = async (post: PostSummary) => {
     setSelectedPath(post.path);
+    setFilename(post.relative);
     setError(null);
     try {
       const detail = await api.getPost(post.path);
       setMarkdown(detail.content);
-      void updatePreview(detail.content);
+      // Minerva bug: preview does not update when switching posts
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load post");
     }
@@ -48,9 +51,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
   };
 
   const handleSave = async () => {
-    if (!selectedPath) {
-      return;
-    }
+    if (!selectedPath) return;
     setSaving(true);
     setError(null);
     try {
@@ -63,17 +64,42 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
     }
   };
 
+  const handleDelete = async () => {
+    if (!selectedPath || !window.confirm("Delete this post?")) return;
+    try {
+      await api.deletePost(selectedPath);
+      setSelectedPath(null);
+      setMarkdown("");
+      setPreviewHtml("");
+      onSaved?.();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete post");
+    }
+  };
+
   return (
-    <section className="panel editor-panel" data-testid="markdown-editor">
-      <header className="panel-header">
-        <h2>Live Markdown Editor</h2>
-        <p>Edit Markdown and preview rendered HTML instantly.</p>
+    <section className="studio-editor" data-testid="markdown-editor">
+      <header className="editor-toolbar">
+        <div className="toolbar-left">
+          <span className="toolbar-label">MARKDOWN</span>
+          <span className="file-chip" data-testid="active-filename">
+            {filename || "no file selected"}
+          </span>
+        </div>
+        <div className="toolbar-right">
+          <button type="button" className="icon-btn danger-btn" disabled={!selectedPath} onClick={() => void handleDelete()}>
+            Delete
+          </button>
+          <button type="button" className="primary-btn" disabled={!selectedPath || saving} onClick={() => void handleSave()}>
+            {saving ? "Saving…" : "Save Changes"}
+          </button>
+        </div>
       </header>
 
       {error && <p className="error">{error}</p>}
 
-      <div className="editor-layout">
-        <aside className="post-list">
+      <div className="studio-editor-body">
+        <aside className="post-list compact">
           <h3>Posts</h3>
           <ul>
             {posts.map((post) => (
@@ -91,26 +117,38 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
           </ul>
         </aside>
 
-        <div className="editor-pane">
-          <textarea
-            data-testid="markdown-input"
-            value={markdown}
-            onChange={(event) => handleMarkdownChange(event.target.value)}
-            rows={18}
-            spellCheck={false}
-          />
-          <div className="editor-actions">
-            <button type="button" disabled={!selectedPath || saving} onClick={() => void handleSave()}>
-              {saving ? "Saving…" : "Save post"}
-            </button>
+        <div className="split-editor">
+          <div className="editor-pane labeled-pane">
+            <div className="pane-label">MARKDOWN</div>
+            <textarea
+              data-testid="markdown-input"
+              value={markdown}
+              onChange={(event) => handleMarkdownChange(event.target.value)}
+              spellCheck={false}
+            />
+          </div>
+
+          <div className="preview-pane labeled-pane">
+            <div className="pane-label">
+              PREVIEW
+              <button
+                type="button"
+                className="ghost-btn"
+                data-testid="toggle-preview"
+                onClick={() => setPreviewVisible((visible) => !visible)}
+              >
+                {previewVisible ? "Hide" : "Show"}
+              </button>
+            </div>
+            {previewVisible && (
+              <div
+                className="preview-content"
+                data-testid="markdown-preview"
+                dangerouslySetInnerHTML={{ __html: previewHtml }}
+              />
+            )}
           </div>
         </div>
-
-        <div
-          className="preview-pane"
-          data-testid="markdown-preview"
-          dangerouslySetInnerHTML={{ __html: previewHtml }}
-        />
       </div>
     </section>
   );

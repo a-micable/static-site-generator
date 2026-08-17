@@ -1,12 +1,11 @@
 diff --git a/src/components/MarkdownEditor.tsx b/src/components/MarkdownEditor.tsx
-index 0000000..0000000 100644
 --- a/src/components/MarkdownEditor.tsx
 +++ b/src/components/MarkdownEditor.tsx
-@@ -36,7 +36,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
+@@ -38,7 +38,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
      try {
        const detail = await api.getPost(post.path);
        setMarkdown(detail.content);
--      // Minerva bug: preview is not refreshed when switching posts programmatically.
+-      // Minerva bug: preview does not update when switching posts
 +      void updatePreview(detail.content);
      } catch (err) {
        setError(err instanceof Error ? err.message : "Failed to load post");

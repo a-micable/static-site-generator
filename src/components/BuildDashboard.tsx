@@ -1,20 +1,27 @@
 import { useBuild } from "../hooks/useBuild";
 
 export function BuildDashboard() {
-  const { status, error, build, refresh } = useBuild();
+  const { status, error, build, refresh, polling } = useBuild();
+  const showSpinner = Boolean(status?.running || polling);
 
   return (
     <section className="panel" data-testid="build-dashboard">
       <header className="panel-header">
         <h2>Build Dashboard</h2>
-        <p>Run builds and monitor generated output.</p>
+        <p>Generate your static site and monitor build progress.</p>
       </header>
 
       {error && <p className="error">{error}</p>}
 
       <div className="build-actions">
-        <button type="button" data-testid="build-full" disabled={status?.running} onClick={() => void build(false, false)}>
-          Full build
+        <button
+          type="button"
+          className="primary-btn"
+          data-testid="build-full"
+          disabled={status?.running}
+          onClick={() => void build(false, false)}
+        >
+          {showSpinner ? "Building…" : "Build Site"}
         </button>
         <button
           type="button"
@@ -22,15 +29,27 @@ export function BuildDashboard() {
           disabled={status?.running}
           onClick={() => void build(true, false)}
         >
-          Incremental build
+          Incremental
         </button>
-        <button type="button" data-testid="build-clean" disabled={status?.running} onClick={() => void build(false, true)}>
+        <button
+          type="button"
+          data-testid="build-clean"
+          disabled={status?.running}
+          onClick={() => void build(false, true)}
+        >
           Clean build
         </button>
         <button type="button" onClick={() => void refresh()}>
           Refresh status
         </button>
       </div>
+
+      {showSpinner && (
+        <div className="spinner-row" data-testid="build-spinner">
+          <span className="spinner" aria-hidden="true" />
+          <span>Build in progress…</span>
+        </div>
+      )}
 
       <dl className="build-status" data-testid="build-status">
         <div>

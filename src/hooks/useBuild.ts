@@ -7,6 +7,7 @@ const POLL_MS = 500;
 export function useBuild() {
   const [status, setStatus] = useState<BuildStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [polling, setPolling] = useState(false);
   const pollRef = useRef<number | null>(null);
 
   const refresh = useCallback(async () => {
@@ -38,16 +39,10 @@ export function useBuild() {
     if (pollRef.current !== null) {
       window.clearInterval(pollRef.current);
     }
+    setPolling(true);
     pollRef.current = window.setInterval(() => {
       void refresh();
     }, POLL_MS);
-  };
-
-  const stopPolling = () => {
-    if (pollRef.current !== null) {
-      window.clearInterval(pollRef.current);
-      pollRef.current = null;
-    }
   };
 
   const build = async (incremental = false, clean = false) => {
@@ -63,9 +58,9 @@ export function useBuild() {
 
   useEffect(() => {
     if (status && !status.running) {
-      stopPolling();
+      // Minerva bug: build status spinner never stops because polling is not cleared
     }
   }, [status]);
 
-  return { status, error, build, refresh };
+  return { status, error, build, refresh, polling };
 }

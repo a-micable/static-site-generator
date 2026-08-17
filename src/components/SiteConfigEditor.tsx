@@ -33,8 +33,8 @@ export function SiteConfigEditor() {
   return (
     <section className="panel" data-testid="site-config-editor">
       <header className="panel-header">
-        <h2>Site Config Editor</h2>
-        <p>Edit ssg.yaml settings for your static site.</p>
+        <h2>Site Settings</h2>
+        <p>Configure title, base URL, author, and search index options in ssg.yaml.</p>
       </header>
 
       {error && <p className="error">{error}</p>}

@@ -1,6 +1,7 @@
 import type {
   BuildStatus,
   CollectionSummary,
+  CreatePostPayload,
   PostDetail,
   PostSummary,
   PreviewResponse,
@@ -38,10 +39,21 @@ export const api = {
   },
   getPost: (path: string) =>
     request<PostDetail>(`/api/posts/${encodeURIComponent(path)}`),
+  createPost: (payload: CreatePostPayload) =>
+    request<PostDetail>("/api/posts", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
   savePost: (path: string, content: string) =>
     request<PostDetail>(`/api/posts/${encodeURIComponent(path)}`, {
       method: "PUT",
       body: JSON.stringify({ content }),
+    }),
+  deletePost: (path: string) =>
+    request<void>(`/api/posts/${encodeURIComponent(path)}`, { method: "DELETE" }),
+  toggleDraft: (path: string) =>
+    request<PostDetail>(`/api/posts/${encodeURIComponent(path)}/draft`, {
+      method: "PATCH",
     }),
   previewMarkdown: (markdown: string) =>
     request<PreviewResponse>("/api/preview", {

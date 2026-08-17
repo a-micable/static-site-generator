@@ -4,6 +4,7 @@ import { BuildDashboard } from "./components/BuildDashboard";
 import { CollectionBrowser } from "./components/CollectionBrowser";
 import { Layout } from "./components/Layout";
 import { MarkdownEditor } from "./components/MarkdownEditor";
+import { PostsManager } from "./components/PostsManager";
 import { SearchIndexViewer } from "./components/SearchIndexViewer";
 import { SiteConfigEditor } from "./components/SiteConfigEditor";
 import type { AppView, PostSummary } from "./types";
@@ -30,14 +31,16 @@ export default function App() {
 
   return (
     <Layout activeView={view} onNavigate={setView}>
+      {postsError && <p className="error banner-error">{postsError}</p>}
+
       {view === "editor" && (
-        <>
-          {postsError && <p className="error">{postsError}</p>}
-          <MarkdownEditor posts={posts} onSaved={() => void loadPosts()} />
-        </>
+        <MarkdownEditor posts={posts} onSaved={() => void loadPosts()} />
       )}
-      {view === "config" && <SiteConfigEditor />}
+      {view === "posts" && (
+        <PostsManager posts={posts} onRefresh={loadPosts} />
+      )}
       {view === "collections" && <CollectionBrowser />}
+      {view === "settings" && <SiteConfigEditor />}
       {view === "build" && <BuildDashboard />}
       {view === "search" && <SearchIndexViewer />}
     </Layout>

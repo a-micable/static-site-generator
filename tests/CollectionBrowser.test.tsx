@@ -35,7 +35,7 @@ describe("CollectionBrowser", () => {
         if (url === "/api/taxonomies") {
           return new Response(
             JSON.stringify({
-              tags: { news: [{ title: "Alpha" }] },
+              tags: { news: [{ title: "Alpha" }], python: [{ title: "Alpha" }] },
               categories: { updates: [{ title: "Alpha" }] },
             }),
           );
@@ -45,11 +45,11 @@ describe("CollectionBrowser", () => {
     );
   });
 
-  it("renders collections and taxonomies", async () => {
+  it("renders collections and tag browser", async () => {
     render(<CollectionBrowser />);
     expect(await screen.findByTestId("collection-browser")).toBeInTheDocument();
     expect(screen.getByText("Alpha")).toBeInTheDocument();
-    expect(screen.getByText("tags")).toBeInTheDocument();
+    expect(screen.getByTestId("tag-news")).toBeInTheDocument();
     expect(screen.getByText("categories")).toBeInTheDocument();
   });
 });

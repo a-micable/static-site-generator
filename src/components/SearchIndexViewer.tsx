@@ -10,14 +10,14 @@ export function SearchIndexViewer() {
   return (
     <section className="panel" data-testid="search-index-viewer">
       <header className="panel-header">
-        <h2>Search Index Viewer</h2>
-        <p>Inspect search.json records with live filtering.</p>
+        <h2>Search Content</h2>
+        <p>Search across titles, tags, and rendered content from search.json.</p>
       </header>
 
       {error && <p className="error">{error}</p>}
 
       <label className="search-filter-label">
-        Filter
+        Search
         <input
           data-testid="search-filter"
           value={query}
@@ -36,6 +36,7 @@ export function SearchIndexViewer() {
             {record.tags.length > 0 && (
               <span className="meta">tags: {record.tags.join(", ")}</span>
             )}
+            <p className="snippet">{record.content.slice(0, 140)}…</p>
           </li>
         ))}
       </ul>

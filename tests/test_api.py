@@ -27,6 +27,20 @@ class TestSiteApi:
         titles = {post["title"] for post in posts}
         assert "First Post" in titles
 
+    def test_create_and_delete_post(self, api: SiteApi, tmp_path: Path) -> None:
+        created = api.create_post({"title": "Temp Post", "collection": "posts"})
+        assert created["title"] == "Temp Post"
+        path = created["path"]
+        api.delete_post(path)
+        with pytest.raises(FileNotFoundError):
+            api.get_post(path)
+
+    def test_toggle_draft(self, api: SiteApi) -> None:
+        posts = api.list_posts("posts")
+        first = posts[0]
+        updated = api.toggle_draft(first["path"])
+        assert updated["draft"] is not first["draft"]
+
     def test_preview_markdown(self, api: SiteApi) -> None:
         result = api.preview_markdown("# Hello")
         assert "<h1" in result["html"]

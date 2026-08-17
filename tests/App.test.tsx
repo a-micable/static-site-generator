@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "../src/App";
 
@@ -75,17 +74,16 @@ describe("App", () => {
     );
   });
 
-  it("renders navigation and markdown editor by default", async () => {
+  it("renders SSG Studio navigation and editor by default", async () => {
     render(<App />);
-    expect(screen.getByText("SSG Dashboard")).toBeInTheDocument();
+    expect(screen.getByText("SSG Studio")).toBeInTheDocument();
     expect(await screen.findByTestId("markdown-editor")).toBeInTheDocument();
   });
 
-  it("switches views from navigation", async () => {
-    const user = userEvent.setup();
+  it("switches to posts manager view", async () => {
     render(<App />);
     await screen.findByTestId("markdown-editor");
-    await user.click(screen.getByRole("button", { name: "Site Config" }));
-    expect(await screen.findByTestId("site-config-editor")).toBeInTheDocument();
+    screen.getByRole("button", { name: /Posts/i }).click();
+    expect(await screen.findByTestId("posts-manager")).toBeInTheDocument();
   });
 });

@@ -21,12 +21,20 @@ class ApiHandler(BaseHTTPRequestHandler):
     def log_message(self, format: str, *args: Any) -> None:
         logger.info("%s - %s", self.address_string(), format % args)
 
+    def _write_cors(self) -> None:
+        self.send_header("Access-Control-Allow-Origin", "*")
+
     def _send_json(self, status: int, payload: Any) -> None:
+        if payload is None:
+            self.send_response(status)
+            self._write_cors()
+            self.end_headers()
+            return
         body = json.dumps(payload).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self._write_cors()
         self.end_headers()
         self.wfile.write(body)
 
@@ -36,24 +44,31 @@ class ApiHandler(BaseHTTPRequestHandler):
             return None
         return self.rfile.read(length)
 
+    def _dispatch(self, method: str) -> None:
+        status, payload = self.api.dispatch(method, self.path, self._read_body())
+        self._send_json(status, payload)
+
     def do_OPTIONS(self) -> None:
         self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS")
+        self._write_cors()
+        self.send_header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
     def do_GET(self) -> None:
-        status, payload = self.api.dispatch("GET", self.path)
-        self._send_json(status, payload)
+        self._dispatch("GET")
 
     def do_PUT(self) -> None:
-        status, payload = self.api.dispatch("PUT", self.path, self._read_body())
-        self._send_json(status, payload)
+        self._dispatch("PUT")
 
     def do_POST(self) -> None:
-        status, payload = self.api.dispatch("POST", self.path, self._read_body())
-        self._send_json(status, payload)
+        self._dispatch("POST")
+
+    def do_PATCH(self) -> None:
+        self._dispatch("PATCH")
+
+    def do_DELETE(self) -> None:
+        self._dispatch("DELETE")
 
 
 def create_handler(api: SiteApi) -> type[ApiHandler]:
@@ -61,7 +76,7 @@ def create_handler(api: SiteApi) -> type[ApiHandler]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="SSG React dashboard API server")
+    parser = argparse.ArgumentParser(description="SSG Studio API server")
     parser.add_argument(
         "source",
         nargs="?",
@@ -82,7 +97,7 @@ def main() -> int:
     api = SiteApi(source)
     handler = create_handler(api)
     server = ThreadingHTTPServer((args.host, args.port), handler)
-    logger.info("API server listening on http://%s:%s (source=%s)", args.host, args.port, source)
+    logger.info("SSG Studio API on http://%s:%s (source=%s)", args.host, args.port, source)
 
     try:
         server.serve_forever()

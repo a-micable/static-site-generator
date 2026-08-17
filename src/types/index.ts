@@ -1,4 +1,4 @@
-export type AppView = "editor" | "config" | "collections" | "build" | "search";
+export type AppView = "editor" | "posts" | "collections" | "settings" | "build" | "search";
 
 export interface SiteConfig {
   title: string;
@@ -65,4 +65,10 @@ export interface SearchRecord {
 
 export interface PreviewResponse {
   html: string;
+}
+
+export interface CreatePostPayload {
+  title: string;
+  collection?: string;
+  slug?: string;
 }

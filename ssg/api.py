@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import threading
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
@@ -17,9 +18,11 @@ import yaml
 from ssg.builder import SiteBuilder, build_site
 from ssg.config import SiteConfig, load_config
 from ssg.exceptions import ConfigError, SSGError
-from ssg.parser import discover_markdown_files, parse_page, render_markdown
+from ssg.parser import discover_markdown_files, parse_page, render_markdown, slugify, split_frontmatter
 
 logger = logging.getLogger(__name__)
+
+FRONTMATTER_PATTERN = re.compile(r"^---\s*\n.*?\n---\s*\n", re.DOTALL)
 
 
 @dataclass
@@ -140,6 +143,48 @@ class SiteApi:
         path.write_text(content, encoding="utf-8")
         return self.get_post(path_str)
 
+    def create_post(self, payload: dict[str, Any]) -> dict[str, Any]:
+        config = self._load_config()
+        title = str(payload.get("title", "Untitled Post"))
+        collection_name = str(payload.get("collection", "posts"))
+        coll = config.get_collection(collection_name)
+        if not coll:
+            raise ConfigError(f"Unknown collection: {collection_name}")
+
+        slug = slugify(str(payload.get("slug", title)))
+        post_path = config.content_path / coll.path / f"{slug}.md"
+        if post_path.exists():
+            raise ConfigError(f"Post already exists: {slug}")
+
+        today = datetime.now(timezone.utc).date().isoformat()
+        content = (
+            f"---\ntitle: {title}\ndate: {today}\nlayout: {coll.layout}\ndraft: false\n---\n\n"
+            f"# {title}\n\nNew post content.\n"
+        )
+        post_path.parent.mkdir(parents=True, exist_ok=True)
+        post_path.write_text(content, encoding="utf-8")
+        return self.get_post(str(post_path))
+
+    def delete_post(self, path_str: str) -> None:
+        path = Path(unquote(path_str))
+        if not path.is_file():
+            raise FileNotFoundError(f"Post not found: {path}")
+        path.unlink()
+
+    def toggle_draft(self, path_str: str) -> dict[str, Any]:
+        path = Path(unquote(path_str))
+        if not path.is_file():
+            raise FileNotFoundError(f"Post not found: {path}")
+
+        raw = path.read_text(encoding="utf-8")
+        metadata, body = split_frontmatter(raw)
+        draft = bool(metadata.get("draft", False))
+        metadata["draft"] = not draft
+
+        yaml_block = yaml.dump(metadata, default_flow_style=False, sort_keys=False).strip()
+        path.write_text(f"---\n{yaml_block}\n---\n{body}", encoding="utf-8")
+        return self.get_post(path_str)
+
     def preview_markdown(self, markdown: str) -> dict[str, str]:
         return {"html": render_markdown(markdown)}
 
@@ -224,6 +269,12 @@ class SiteApi:
             if route == "/api/posts" and method == "GET":
                 collection = query.get("collection", [None])[0]
                 return HTTPStatus.OK, self.list_posts(collection)
+            if route == "/api/posts" and method == "POST":
+                payload = json.loads(body.decode("utf-8")) if body else {}
+                return HTTPStatus.CREATED, self.create_post(payload)
+            if route.startswith("/api/posts/") and route.endswith("/draft") and method == "PATCH":
+                post_path = route.removeprefix("/api/posts/").removesuffix("/draft")
+                return HTTPStatus.OK, self.toggle_draft(post_path)
             if route.startswith("/api/posts/") and method == "GET":
                 post_path = route.removeprefix("/api/posts/")
                 return HTTPStatus.OK, self.get_post(post_path)
@@ -232,6 +283,10 @@ class SiteApi:
                 payload = json.loads(body.decode("utf-8")) if body else {}
                 content = str(payload.get("content", ""))
                 return HTTPStatus.OK, self.save_post(post_path, content)
+            if route.startswith("/api/posts/") and method == "DELETE":
+                post_path = route.removeprefix("/api/posts/")
+                self.delete_post(post_path)
+                return HTTPStatus.NO_CONTENT, None
             if route == "/api/preview" and method == "POST":
                 payload = json.loads(body.decode("utf-8")) if body else {}
                 markdown = str(payload.get("markdown", ""))
