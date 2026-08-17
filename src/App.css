@@ -1,0 +1,265 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.5;
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --border: #d8dee4;
+  --text: #1f2933;
+  --muted: #52606d;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --danger: #b91c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --panel: #111827;
+    --border: #334155;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent-soft: #1e3a8a;
+    --danger: #fca5a5;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 1.25rem;
+}
+
+.brand {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.nav-link {
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: var(--accent-soft);
+}
+
+.main {
+  padding: 1.5rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.panel-header h2 {
+  margin: 0 0 0.25rem;
+}
+
+.panel-header p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 1rem;
+}
+
+.post-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.post-list button.active,
+.post-list button:hover {
+  background: var(--accent-soft);
+}
+
+.editor-pane textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: transparent;
+  color: inherit;
+  resize: vertical;
+}
+
+.preview-pane {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  min-height: 320px;
+  overflow: auto;
+}
+
+.config-form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 560px;
+}
+
+.config-form label {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.config-form input,
+.config-form textarea {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  background: transparent;
+  color: inherit;
+}
+
+.checkbox {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.collection-grid,
+.taxonomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.build-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.build-actions button,
+.editor-actions button,
+.config-form button {
+  border: 0;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.build-actions button:disabled,
+.editor-actions button:disabled,
+.config-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.build-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.build-status dt {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.build-status dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.search-filter-label {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 420px;
+  margin-bottom: 0.75rem;
+}
+
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-record {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 0.15rem;
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+}
