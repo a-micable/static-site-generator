@@ -7,14 +7,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 def _append_theme_config(site: Path) -> None:
     config = site / "ssg.yaml"
     config.write_text(
         config.read_text(encoding="utf-8") + "\ntheme: editorial\n",
         encoding="utf-8",
     )
-
 
 def _write_theme(site: Path, marker: str = "Theme Base") -> None:
     theme = site / "themes" / "editorial"
@@ -31,7 +29,6 @@ def _write_theme(site: Path, marker: str = "Theme Base") -> None:
         "body { color: #222; }\n",
         encoding="utf-8",
     )
-
 
 class TestThemes:
     def test_theme_templates_are_used_as_fallback(self, example_site: Path) -> None:
@@ -67,7 +64,3 @@ class TestThemes:
         html = (example_site / "dist" / "index.html").read_text(encoding="utf-8")
         assert "Theme Should Not Render" not in html
         assert "Built with SSG" in html
-# rewrite commit 517
-# rewrite commit 518
-# rewrite commit 519
-# rewrite commit 520

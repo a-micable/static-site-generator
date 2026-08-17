@@ -13,7 +13,6 @@ from ssg.parser import Page
 
 logger = logging.getLogger(__name__)
 
-
 class TemplateRenderer:
     """Renders pages using Jinja2 templates with inheritance."""
 
@@ -76,15 +75,3 @@ class TemplateRenderer:
         except TemplateNotFound:
             return False
         return True
-# rewrite commit 325
-# rewrite commit 326
-# rewrite commit 327
-# rewrite commit 328
-# rewrite commit 329
-# rewrite commit 330
-# rewrite commit 331
-# rewrite commit 332
-# rewrite commit 333
-# rewrite commit 334
-# rewrite commit 335
-# rewrite commit 336

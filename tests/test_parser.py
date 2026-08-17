@@ -6,7 +6,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 class TestContentParsing:
     def test_yaml_frontmatter_title_used(self, example_site: Path) -> None:
         subprocess.run(
@@ -44,15 +43,3 @@ class TestContentParsing:
         ).read_text(encoding="utf-8")
         assert "python" in html
         assert "ssg" in html
-# rewrite commit 481
-# rewrite commit 482
-# rewrite commit 483
-# rewrite commit 484
-# rewrite commit 485
-# rewrite commit 486
-# rewrite commit 487
-# rewrite commit 488
-# rewrite commit 489
-# rewrite commit 490
-# rewrite commit 491
-# rewrite commit 492

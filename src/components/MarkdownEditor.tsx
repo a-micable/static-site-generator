@@ -39,7 +39,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
     try {
       const detail = await api.getPost(post.path);
       setMarkdown(detail.content);
-      // Minerva bug: preview does not update when switching posts
+      void updatePreview(detail.content);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load post");
     }
@@ -122,6 +122,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
             <div className="pane-label">MARKDOWN</div>
             <textarea
               data-testid="markdown-input"
+              aria-label="Markdown source"
               value={markdown}
               onChange={(event) => handleMarkdownChange(event.target.value)}
               spellCheck={false}
@@ -144,6 +145,8 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
               <div
                 className="preview-content"
                 data-testid="markdown-preview"
+                role="region"
+                aria-label="Markdown preview"
                 dangerouslySetInnerHTML={{ __html: previewHtml }}
               />
             )}

@@ -9,11 +9,9 @@ import pytest
 
 from ssg.api import SiteApi
 
-
 @pytest.fixture
 def api(example_site: Path) -> SiteApi:
     return SiteApi(example_site)
-
 
 class TestSiteApi:
     def test_get_config(self, api: SiteApi) -> None:

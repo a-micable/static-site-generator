@@ -155,7 +155,6 @@ Another post demonstrating collections, tags, and pagination.
 """,
 }
 
-
 def _configure_logging(verbose: bool) -> None:
     level = logging.DEBUG if verbose else logging.INFO
     logging.basicConfig(
@@ -163,7 +162,6 @@ def _configure_logging(verbose: bool) -> None:
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         datefmt="%H:%M:%S",
     )
-
 
 def cmd_build(args: argparse.Namespace) -> int:
     source = Path(args.source).resolve()
@@ -182,7 +180,6 @@ def cmd_build(args: argparse.Namespace) -> int:
     except SSGError as exc:
         logger.error("%s", exc)
         return 1
-
 
 def cmd_init(args: argparse.Namespace) -> int:
     target = Path(args.target).resolve()
@@ -213,7 +210,6 @@ def cmd_init(args: argparse.Namespace) -> int:
     print(f"Initialized site at {target}")
     print("Run 'ssg build' to generate your site.")
     return 0
-
 
 def cmd_serve(args: argparse.Namespace) -> int:
     source = Path(args.source).resolve()
@@ -266,7 +262,6 @@ def cmd_serve(args: argparse.Namespace) -> int:
 
     return 0
 
-
 def cmd_inspect(args: argparse.Namespace) -> int:
     source = Path(args.source).resolve()
     try:
@@ -286,7 +281,6 @@ def cmd_inspect(args: argparse.Namespace) -> int:
     }
     print(json.dumps(payload, indent=2, sort_keys=True))
     return 0
-
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -359,25 +353,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     return parser
 
-
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(list(argv) if argv is not None else None)
     _configure_logging(args.verbose)
     return args.func(args)
 
-
 if __name__ == "__main__":
     sys.exit(main())
-# rewrite commit 241
-# rewrite commit 242
-# rewrite commit 243
-# rewrite commit 244
-# rewrite commit 245
-# rewrite commit 246
-# rewrite commit 247
-# rewrite commit 248
-# rewrite commit 249
-# rewrite commit 250
-# rewrite commit 251
-# rewrite commit 252

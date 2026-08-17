@@ -62,7 +62,7 @@ describe("MarkdownEditor", () => {
     expect(screen.getByTestId("markdown-input")).toHaveValue("# First content");
   });
 
-  it.skip("Minerva fix: updates preview when switching posts", async () => {
+  it("updates preview when switching posts", async () => {
     const user = userEvent.setup();
     render(<MarkdownEditor posts={posts} />);
     await screen.findByTestId("markdown-input");

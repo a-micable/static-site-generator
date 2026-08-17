@@ -5,7 +5,6 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-
 class TestFeedAndSitemap:
     def test_sitemap_valid_xml(self, build_site: Path) -> None:
         sitemap_path = build_site / "sitemap.xml"
@@ -52,15 +51,3 @@ class TestFeedAndSitemap:
         guid = item.find("guid")
         assert link is not None and link.text.startswith("https://example.com/")
         assert guid is not None and guid.text == link.text
-# rewrite commit 457
-# rewrite commit 458
-# rewrite commit 459
-# rewrite commit 460
-# rewrite commit 461
-# rewrite commit 462
-# rewrite commit 463
-# rewrite commit 464
-# rewrite commit 465
-# rewrite commit 466
-# rewrite commit 467
-# rewrite commit 468

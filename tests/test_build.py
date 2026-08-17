@@ -9,7 +9,6 @@ from pathlib import Path
 
 import pytest
 
-
 class TestSiteBuild:
     def test_build_creates_output_directory(self, example_site: Path) -> None:
         subprocess.run(
@@ -129,15 +128,3 @@ class TestSiteBuild:
             capture_output=True,
         )
         assert not stale.exists()
-# rewrite commit 409
-# rewrite commit 410
-# rewrite commit 411
-# rewrite commit 412
-# rewrite commit 413
-# rewrite commit 414
-# rewrite commit 415
-# rewrite commit 416
-# rewrite commit 417
-# rewrite commit 418
-# rewrite commit 419
-# rewrite commit 420

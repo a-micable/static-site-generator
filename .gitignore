@@ -18,3 +18,5 @@ htmlcov/
 venv/
 .ssg-cache.json
 .ssg-assets.json
+ssg/plugins/generated/
+example-site/content/posts/generated-post-*.md

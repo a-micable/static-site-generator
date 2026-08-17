@@ -8,7 +8,6 @@ import json
 from ssg.config import load_config
 from ssg.content import ContentIndex, ContentQuery
 
-
 class TestContentIndex:
     def test_index_counts_collections_and_taxonomies(self, example_site: Path) -> None:
         config = load_config(example_site)
@@ -68,15 +67,3 @@ class TestContentIndex:
         }
 
         assert actual == golden
-# rewrite commit 445
-# rewrite commit 446
-# rewrite commit 447
-# rewrite commit 448
-# rewrite commit 449
-# rewrite commit 450
-# rewrite commit 451
-# rewrite commit 452
-# rewrite commit 453
-# rewrite commit 454
-# rewrite commit 455
-# rewrite commit 456

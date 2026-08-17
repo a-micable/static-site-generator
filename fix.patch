@@ -1,7 +1,7 @@
 diff --git a/src/components/MarkdownEditor.tsx b/src/components/MarkdownEditor.tsx
 --- a/src/components/MarkdownEditor.tsx
 +++ b/src/components/MarkdownEditor.tsx
-@@ -38,7 +38,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
+@@ -39,7 +39,7 @@ export function MarkdownEditor({ posts, onSaved }: MarkdownEditorProps) {
      try {
        const detail = await api.getPost(post.path);
        setMarkdown(detail.content);

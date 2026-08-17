@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 FINGERPRINT_LENGTH = 8
 
-
 @dataclass
 class AssetManifest:
     """Tracks asset fingerprints for cache busting."""
@@ -27,24 +26,20 @@ class AssetManifest:
     def from_dict(cls, data: dict[str, str]) -> AssetManifest:
         return cls(mappings=dict(data))
 
-
 def fingerprint_content(content: bytes) -> str:
     """Generate a short content hash for cache busting."""
     digest = hashlib.sha256(content).hexdigest()
     return digest[:FINGERPRINT_LENGTH]
 
-
 def fingerprint_file(path: Path) -> str:
     """Generate fingerprint from file contents."""
     return fingerprint_content(path.read_bytes())
-
 
 def fingerprinted_name(relative_path: Path, fingerprint: str) -> str:
     """Insert fingerprint before file extension."""
     stem = relative_path.stem
     suffix = relative_path.suffix
     return f"{stem}.{fingerprint}{suffix}"
-
 
 @dataclass
 class AssetProcessor:
@@ -91,12 +86,10 @@ class AssetProcessor:
         logger.info("Processed %d assets", len(manifest.mappings))
         return manifest
 
-
 def save_manifest(manifest: AssetManifest, path: Path) -> None:
     """Persist asset manifest to disk."""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(manifest.to_dict(), indent=2), encoding="utf-8")
-
 
 def load_manifest(path: Path) -> AssetManifest:
     """Load asset manifest from disk."""
@@ -105,22 +98,9 @@ def load_manifest(path: Path) -> AssetManifest:
     data = json.loads(path.read_text(encoding="utf-8"))
     return AssetManifest.from_dict(data)
 
-
 def resolve_asset_url(original: str, manifest: AssetManifest) -> str:
     """Resolve an asset path to its fingerprinted URL."""
     normalized = original.lstrip("/")
     if normalized in manifest.mappings:
         return manifest.mappings[normalized]
     return original
-# rewrite commit 217
-# rewrite commit 218
-# rewrite commit 219
-# rewrite commit 220
-# rewrite commit 221
-# rewrite commit 222
-# rewrite commit 223
-# rewrite commit 224
-# rewrite commit 225
-# rewrite commit 226
-# rewrite commit 227
-# rewrite commit 228

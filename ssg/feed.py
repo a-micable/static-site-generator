@@ -12,18 +12,15 @@ from ssg.parser import Page
 
 logger = logging.getLogger(__name__)
 
-
 def _format_rfc822(dt: datetime) -> str:
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
     return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
 
-
 def _normalize_datetime(dt: datetime) -> datetime:
     if dt.tzinfo is not None:
         return dt.replace(tzinfo=None)
     return dt
-
 
 def build_rss_xml(
     title: str,
@@ -68,7 +65,6 @@ def build_rss_xml(
     xml_bytes = ET.tostring(rss, encoding="unicode", xml_declaration=False)
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml_bytes
 
-
 def write_feed(
     output_path: Path,
     title: str,
@@ -90,15 +86,3 @@ def write_feed(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(xml, encoding="utf-8")
     logger.info("Wrote RSS feed: %s", output_path)
-# rewrite commit 289
-# rewrite commit 290
-# rewrite commit 291
-# rewrite commit 292
-# rewrite commit 293
-# rewrite commit 294
-# rewrite commit 295
-# rewrite commit 296
-# rewrite commit 297
-# rewrite commit 298
-# rewrite commit 299
-# rewrite commit 300

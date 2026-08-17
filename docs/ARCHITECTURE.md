@@ -51,15 +51,3 @@ a `HookContext` with `config`, `phase`, and mutable `data`.
 
 `page_rendered` may return a string to replace the rendered HTML. Other hooks can
 inspect build state and write side artifacts using paths from `context.config`.
-<!-- rewrite commit 13 -->
-<!-- rewrite commit 14 -->
-<!-- rewrite commit 15 -->
-<!-- rewrite commit 16 -->
-<!-- rewrite commit 17 -->
-<!-- rewrite commit 18 -->
-<!-- rewrite commit 19 -->
-<!-- rewrite commit 20 -->
-<!-- rewrite commit 21 -->
-<!-- rewrite commit 22 -->
-<!-- rewrite commit 23 -->
-<!-- rewrite commit 24 -->

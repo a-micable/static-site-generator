@@ -9,7 +9,6 @@ from typing import Iterable
 from ssg.config import CollectionConfig, SiteConfig
 from ssg.parser import Page, discover_markdown_files, parse_page, slugify
 
-
 @dataclass(frozen=True)
 class ContentQuery:
     """Filter criteria for selecting content pages."""
@@ -18,7 +17,6 @@ class ContentQuery:
     taxonomy: str | None = None
     term: str | None = None
     include_drafts: bool = False
-
 
 @dataclass
 class ContentIndex:
@@ -102,7 +100,6 @@ class ContentIndex:
             },
         }
 
-
 def _collection_for(config: SiteConfig, relative: Path) -> CollectionConfig | None:
     for collection in config.collections:
         try:
@@ -111,7 +108,6 @@ def _collection_for(config: SiteConfig, relative: Path) -> CollectionConfig | No
         except ValueError:
             continue
     return None
-
 
 def _assign_url(page: Page, relative: Path, collection: CollectionConfig | None) -> None:
     if collection:
@@ -130,7 +126,6 @@ def _assign_url(page: Page, relative: Path, collection: CollectionConfig | None)
     else:
         page.url = f"{rel.parent}/{page.slug}/index.html"
 
-
 def _load_page(config: SiteConfig, md_path: Path) -> Page:
     relative = md_path.relative_to(config.content_path)
     collection = _collection_for(config, relative)
@@ -145,18 +140,5 @@ def _load_page(config: SiteConfig, md_path: Path) -> Page:
     _assign_url(page, relative, collection)
     return page
 
-
 def taxonomy_url(collection: CollectionConfig, taxonomy: str, term: str) -> str:
     return f"{collection.output}/{taxonomy}/{slugify(term)}/index.html"
-# rewrite commit 265
-# rewrite commit 266
-# rewrite commit 267
-# rewrite commit 268
-# rewrite commit 269
-# rewrite commit 270
-# rewrite commit 271
-# rewrite commit 272
-# rewrite commit 273
-# rewrite commit 274
-# rewrite commit 275
-# rewrite commit 276

@@ -7,7 +7,6 @@ import sys
 import json
 from pathlib import Path
 
-
 class TestCLI:
     def test_help(self, ssg_cli: list[str]) -> None:
         result = subprocess.run(
@@ -94,15 +93,3 @@ class TestCLI:
         assert data["site"]["title"] == "Example Site"
         assert data["content"]["collections"] == {"posts": 3}
         assert data["content"]["taxonomies"]["categories"]["releases"] == 2
-# rewrite commit 421
-# rewrite commit 422
-# rewrite commit 423
-# rewrite commit 424
-# rewrite commit 425
-# rewrite commit 426
-# rewrite commit 427
-# rewrite commit 428
-# rewrite commit 429
-# rewrite commit 430
-# rewrite commit 431
-# rewrite commit 432

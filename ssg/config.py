@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_CONFIG_FILENAME = "ssg.yaml"
 
-
 @dataclass
 class CollectionConfig:
     """Configuration for a content collection."""
@@ -29,7 +28,6 @@ class CollectionConfig:
     layout: str = "post.html"
     archive: bool = True
     tags: bool = True
-
 
 @dataclass
 class SiteConfig:
@@ -91,7 +89,6 @@ class SiteConfig:
                 return collection
         return None
 
-
 def _parse_collection(name: str, data: dict[str, Any]) -> CollectionConfig:
     per_page = int(data.get("per_page", 10))
     if per_page < 0:
@@ -108,7 +105,6 @@ def _parse_collection(name: str, data: dict[str, Any]) -> CollectionConfig:
         archive=bool(data.get("archive", True)),
         tags=bool(data.get("tags", True)),
     )
-
 
 def _parse_taxonomies(raw: Any) -> list[str]:
     if raw is None:
@@ -127,12 +123,10 @@ def _parse_taxonomies(raw: Any) -> list[str]:
             taxonomies.append(name)
     return taxonomies
 
-
 def _validate_relative_path(name: str, value: str) -> None:
     path = Path(value)
     if path.is_absolute() or ".." in path.parts:
         raise ConfigError(f"Configuration '{name}' must be a relative path")
-
 
 def _parse_string_list(raw: Any, key: str) -> list[str]:
     if raw is None:
@@ -143,7 +137,6 @@ def _parse_string_list(raw: Any, key: str) -> list[str]:
     if len(values) != len(raw):
         raise ConfigError(f"Configuration '{key}' cannot contain empty values")
     return values
-
 
 def load_config(source_root: Path, config_path: Path | None = None) -> SiteConfig:
     """Load and validate site configuration from YAML."""
@@ -217,7 +210,6 @@ def load_config(source_root: Path, config_path: Path | None = None) -> SiteConfi
     logger.info("Loaded site config: %s (%s)", config.title, config.base_url)
     return config
 
-
 def default_config_dict() -> dict[str, Any]:
     """Return default configuration for init command."""
     return {
@@ -249,15 +241,3 @@ def default_config_dict() -> dict[str, Any]:
             }
         },
     }
-# rewrite commit 253
-# rewrite commit 254
-# rewrite commit 255
-# rewrite commit 256
-# rewrite commit 257
-# rewrite commit 258
-# rewrite commit 259
-# rewrite commit 260
-# rewrite commit 261
-# rewrite commit 262
-# rewrite commit 263
-# rewrite commit 264

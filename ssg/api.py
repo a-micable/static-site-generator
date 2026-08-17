@@ -24,7 +24,6 @@ logger = logging.getLogger(__name__)
 
 FRONTMATTER_PATTERN = re.compile(r"^---\s*\n.*?\n---\s*\n", re.DOTALL)
 
-
 @dataclass
 class BuildState:
     running: bool = False
@@ -33,7 +32,6 @@ class BuildState:
     output_dir: str = ""
     error: str | None = None
     last_built_at: str | None = None
-
 
 class SiteApi:
     """JSON API for site configuration, content, builds, and search."""

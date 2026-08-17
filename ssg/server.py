@@ -14,7 +14,6 @@ from ssg.api import SiteApi
 
 logger = logging.getLogger(__name__)
 
-
 class ApiHandler(BaseHTTPRequestHandler):
     api: SiteApi
 
@@ -70,10 +69,8 @@ class ApiHandler(BaseHTTPRequestHandler):
     def do_DELETE(self) -> None:
         self._dispatch("DELETE")
 
-
 def create_handler(api: SiteApi) -> type[ApiHandler]:
     return type("BoundApiHandler", (ApiHandler,), {"api": api})
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="SSG Studio API server")
@@ -106,7 +103,6 @@ def main() -> int:
     finally:
         server.server_close()
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -26,7 +26,6 @@ logger = logging.getLogger(__name__)
 CACHE_FILENAME = ".ssg-cache.json"
 ASSET_MANIFEST_FILENAME = ".ssg-assets.json"
 
-
 @dataclass
 class BuildCache:
     """Tracks source file hashes for incremental builds."""
@@ -51,7 +50,6 @@ class BuildCache:
             ),
         )
 
-
 @dataclass
 class BuildResult:
     """Result of a site build."""
@@ -61,10 +59,8 @@ class BuildResult:
     incremental: bool = False
     output_dir: Path = field(default_factory=lambda: Path("dist"))
 
-
 def _file_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
-
 
 def _load_cache(output_dir: Path) -> BuildCache:
     cache_path = output_dir / CACHE_FILENAME
@@ -77,11 +73,9 @@ def _load_cache(output_dir: Path) -> BuildCache:
         logger.warning("Invalid build cache, rebuilding all")
         return BuildCache()
 
-
 def _save_cache(output_dir: Path, cache: BuildCache) -> None:
     cache_path = output_dir / CACHE_FILENAME
     cache_path.write_text(json.dumps(cache.to_dict(), indent=2), encoding="utf-8")
-
 
 def _collect_template_hashes(templates_dir: Path) -> dict[str, str]:
     hashes: dict[str, str] = {}
@@ -93,16 +87,13 @@ def _collect_template_hashes(templates_dir: Path) -> dict[str, str]:
             hashes[key] = _file_hash(path)
     return hashes
 
-
 def _templates_changed(cache: BuildCache, templates_dir: Path) -> bool:
     return _collect_template_hashes(templates_dir) != cache.template_hashes
-
 
 def _needs_rebuild(path: Path, cache: BuildCache, force: bool) -> bool:
     if force:
         return True
     return cache.file_hashes.get(str(path)) != _file_hash(path)
-
 
 def _sort_pages(pages: list[Page], sort_by: str, sort_order: str) -> list[Page]:
     reverse = sort_order.lower() == "desc"
@@ -116,12 +107,10 @@ def _sort_pages(pages: list[Page], sort_by: str, sort_order: str) -> list[Page]:
 
     return sorted(pages, key=sort_key, reverse=reverse)
 
-
 def _paginate(items: list[Any], per_page: int) -> list[list[Any]]:
     if per_page <= 0:
         return [items]
     return [items[i : i + per_page] for i in range(0, len(items), per_page)]
-
 
 def _page_output_path(output_dir: Path, url: str) -> Path:
     clean = url.strip("/")
@@ -129,11 +118,9 @@ def _page_output_path(output_dir: Path, url: str) -> Path:
         return output_dir / clean if clean else output_dir / "index.html"
     return output_dir / clean / "index.html"
 
-
 def _write_page(output_path: Path, html: str) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html, encoding="utf-8")
-
 
 class SiteBuilder:
     """Orchestrates the full static site build process."""
@@ -444,7 +431,6 @@ class SiteBuilder:
             _write_page(_page_output_path(output_dir, list_url), html)
             result.pages_built += 1
 
-
 def build_site(
     source_root: Path,
     incremental: bool = False,
@@ -456,15 +442,3 @@ def build_site(
     config = load_config(source_root)
     builder = SiteBuilder(config)
     return builder.build(incremental=incremental, clean=clean)
-# rewrite commit 229
-# rewrite commit 230
-# rewrite commit 231
-# rewrite commit 232
-# rewrite commit 233
-# rewrite commit 234
-# rewrite commit 235
-# rewrite commit 236
-# rewrite commit 237
-# rewrite commit 238
-# rewrite commit 239
-# rewrite commit 240

@@ -9,7 +9,6 @@ import pytest
 from ssg.config import load_config
 from ssg.exceptions import ConfigError
 
-
 class TestConfigValidation:
     def test_rejects_parent_directory_output(self, tmp_path: Path) -> None:
         (tmp_path / "ssg.yaml").write_text(
@@ -43,15 +42,3 @@ class TestConfigValidation:
 
         with pytest.raises(ConfigError, match="theme"):
             load_config(tmp_path)
-# rewrite commit 433
-# rewrite commit 434
-# rewrite commit 435
-# rewrite commit 436
-# rewrite commit 437
-# rewrite commit 438
-# rewrite commit 439
-# rewrite commit 440
-# rewrite commit 441
-# rewrite commit 442
-# rewrite commit 443
-# rewrite commit 444

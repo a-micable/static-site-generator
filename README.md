@@ -5,16 +5,22 @@ SSG Studio is a React + TypeScript frontend for the Python Static Site Generator
 ## Features
 
 - **Live Markdown Editor** — split-pane editor with instant HTML preview
-- **Posts Manager** — create, edit, delete, and paginate posts
+- **Posts Manager** — create, edit, delete, paginate, and toggle drafts
 - **Tags & Categories** — browse taxonomies and filter tagged content
 - **Site Settings** — edit `ssg.yaml` configuration
 - **Build Dashboard** — run builds with live status
 - **Search** — filter content from `search.json`
 
+## Requirements
+
+- Node.js 20+
+- Python 3.11+ (for the SSG engine and API server)
+
 ## Quick Start
 
 ```bash
-npm install
+nvm use          # Node 20 — see .nvmrc
+npm ci
 pip install -e ".[dev]"
 
 # Terminal 1 — Python API
@@ -29,8 +35,8 @@ Open http://127.0.0.1:5173/
 ## Testing
 
 ```bash
-npm test          # Vitest — React components
-npm run build     # Production build
+npm test          # Vitest — React components (no live API required)
+npm run build     # Typecheck + production build
 pytest            # Python engine + API
 ```
 
@@ -51,15 +57,15 @@ static-site-generator/
 
 ## Minerva Fix Tasks
 
-See `MINERVA_ISSUE.md` for five intentional behavioral bugs. Apply the sample preview fix:
+This repository includes intentional behavioral bugs for React fix-task evaluation. See:
 
-```bash
-git apply fix.patch
-```
+- `MINERVA_ISSUE.md` — issue descriptions
+- `MINERVA_SUBMISSION.md` — submission checklist
+- `fix.patch` — minimal fix for the preview-on-post-switch issue
 
-## Python Engine
+## Python CLI
 
-The Python CLI remains available:
+The Python engine remains available:
 
 ```bash
 ssg build example-site

@@ -7,7 +7,6 @@ import sys
 import time
 from pathlib import Path
 
-
 class TestIncrementalBuild:
     def test_incremental_skips_unchanged_files(self, example_site: Path) -> None:
         subprocess.run(
@@ -98,15 +97,3 @@ class TestIncrementalBuild:
         )
         cache = example_site / "dist" / ".ssg-cache.json"
         assert cache.is_file()
-# rewrite commit 469
-# rewrite commit 470
-# rewrite commit 471
-# rewrite commit 472
-# rewrite commit 473
-# rewrite commit 474
-# rewrite commit 475
-# rewrite commit 476
-# rewrite commit 477
-# rewrite commit 478
-# rewrite commit 479
-# rewrite commit 480

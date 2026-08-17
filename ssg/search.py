@@ -12,11 +12,9 @@ from ssg.parser import Page
 TAG_RE = re.compile(r"<[^>]+>")
 SPACE_RE = re.compile(r"\s+")
 
-
 def plain_text(html: str) -> str:
     text = TAG_RE.sub(" ", html)
     return SPACE_RE.sub(" ", text).strip()
-
 
 def page_search_record(page: Page, base_url: str) -> dict[str, object]:
     return {
@@ -32,7 +30,6 @@ def page_search_record(page: Page, base_url: str) -> dict[str, object]:
         "content": plain_text(page.content_html),
     }
 
-
 def build_search_index(pages: Sequence[Page], base_url: str) -> list[dict[str, object]]:
     records = [
         page_search_record(page, base_url)
@@ -40,7 +37,6 @@ def build_search_index(pages: Sequence[Page], base_url: str) -> list[dict[str, o
         if page.is_published and page.url
     ]
     return sorted(records, key=lambda item: str(item["path"]))
-
 
 def write_search_index(output_path: Path, pages: Sequence[Page], base_url: str) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)

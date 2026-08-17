@@ -7,7 +7,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 class TestAssets:
     def test_assets_copied_with_fingerprint(self, build_site: Path) -> None:
         assets = list((build_site / "assets").glob("*.css"))
@@ -48,15 +47,3 @@ class TestAssets:
         js_files = list((example_site / "dist" / "assets").glob("extra.*.js"))
         assert len(js_files) == 1
         assert old_name in [p.name for p in (example_site / "dist" / "assets").glob("style.*.css")]
-# rewrite commit 397
-# rewrite commit 398
-# rewrite commit 399
-# rewrite commit 400
-# rewrite commit 401
-# rewrite commit 402
-# rewrite commit 403
-# rewrite commit 404
-# rewrite commit 405
-# rewrite commit 406
-# rewrite commit 407
-# rewrite commit 408

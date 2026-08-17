@@ -22,14 +22,12 @@ HOOKS = {
     "build_finished",
 }
 
-
 @dataclass
 class Plugin:
     """Loaded plugin module and metadata."""
 
     name: str
     module: ModuleType
-
 
 @dataclass
 class HookContext:
@@ -38,7 +36,6 @@ class HookContext:
     config: SiteConfig
     phase: str
     data: dict[str, Any]
-
 
 class PluginManager:
     """Loads configured plugins and dispatches supported hooks."""
@@ -92,15 +89,3 @@ class PluginManager:
             if result is not None:
                 context.data["result"] = result
         return context
-# rewrite commit 313
-# rewrite commit 314
-# rewrite commit 315
-# rewrite commit 316
-# rewrite commit 317
-# rewrite commit 318
-# rewrite commit 319
-# rewrite commit 320
-# rewrite commit 321
-# rewrite commit 322
-# rewrite commit 323
-# rewrite commit 324

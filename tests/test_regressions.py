@@ -13,7 +13,6 @@ from ssg.parser import parse_page, split_frontmatter
 from ssg.renderer import TemplateRenderer
 from ssg.watcher import SiteWatcher
 
-
 class TestRegressionCoverage:
     def test_invalid_frontmatter_raises_parse_error(self) -> None:
         with pytest.raises(ParseError):
@@ -61,15 +60,3 @@ class TestRegressionCoverage:
         watcher.on_any_event(FileModifiedEvent("/tmp/file.tmp"))
 
         assert called is False
-# rewrite commit 505
-# rewrite commit 506
-# rewrite commit 507
-# rewrite commit 508
-# rewrite commit 509
-# rewrite commit 510
-# rewrite commit 511
-# rewrite commit 512
-# rewrite commit 513
-# rewrite commit 514
-# rewrite commit 515
-# rewrite commit 516

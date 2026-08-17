@@ -21,7 +21,6 @@ FRONTMATTER_PATTERN = re.compile(
     re.DOTALL,
 )
 
-
 @dataclass
 class Page:
     """A parsed content page."""
@@ -45,7 +44,6 @@ class Page:
     def is_published(self) -> bool:
         return not self.draft
 
-
 def _parse_date(value: Any) -> datetime | None:
     if value is None:
         return None
@@ -65,13 +63,11 @@ def _parse_date(value: Any) -> datetime | None:
             return None
     return None
 
-
 def slugify(text: str) -> str:
     slug = text.lower().strip()
     slug = re.sub(r"[^\w\s-]", "", slug)
     slug = re.sub(r"[\s_-]+", "-", slug)
     return slug.strip("-") or "untitled"
-
 
 def _metadata_list(metadata: dict[str, Any], key: str) -> list[str]:
     value = metadata.get(key, [])
@@ -80,7 +76,6 @@ def _metadata_list(metadata: dict[str, Any], key: str) -> list[str]:
     if isinstance(value, list):
         return [str(item).strip() for item in value if str(item).strip()]
     return []
-
 
 def split_frontmatter(content: str) -> tuple[dict[str, Any], str]:
     """Split YAML frontmatter from markdown body."""
@@ -101,7 +96,6 @@ def split_frontmatter(content: str) -> tuple[dict[str, Any], str]:
 
     return metadata, body
 
-
 def render_markdown(body: str) -> str:
     """Convert markdown body to HTML."""
     md = markdown.Markdown(
@@ -117,7 +111,6 @@ def render_markdown(body: str) -> str:
         },
     )
     return md.convert(body)
-
 
 def parse_page(
     source_path: Path,
@@ -169,21 +162,8 @@ def parse_page(
     logger.debug("Parsed page: %s (%s)", page.title, source_path)
     return page
 
-
 def discover_markdown_files(directory: Path) -> list[Path]:
     """Find all markdown files in a directory recursively."""
     if not directory.is_dir():
         return []
     return sorted(directory.rglob("*.md"))
-# rewrite commit 301
-# rewrite commit 302
-# rewrite commit 303
-# rewrite commit 304
-# rewrite commit 305
-# rewrite commit 306
-# rewrite commit 307
-# rewrite commit 308
-# rewrite commit 309
-# rewrite commit 310
-# rewrite commit 311
-# rewrite commit 312

@@ -14,12 +14,10 @@ logger = logging.getLogger(__name__)
 
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
-
 def _format_lastmod(page: Page) -> str | None:
     if page.date:
         return page.date.strftime("%Y-%m-%d")
     return None
-
 
 def build_sitemap_xml(base_url: str, pages: Sequence[Page]) -> str:
     """Generate sitemap XML for published pages."""
@@ -43,22 +41,9 @@ def build_sitemap_xml(base_url: str, pages: Sequence[Page]) -> str:
     xml_bytes = ET.tostring(urlset, encoding="unicode", xml_declaration=False)
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml_bytes
 
-
 def write_sitemap(output_path: Path, base_url: str, pages: Sequence[Page]) -> None:
     """Write sitemap.xml to the output directory."""
     xml = build_sitemap_xml(base_url, pages)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(xml, encoding="utf-8")
     logger.info("Wrote sitemap: %s (%d URLs)", output_path, len(pages))
-# rewrite commit 349
-# rewrite commit 350
-# rewrite commit 351
-# rewrite commit 352
-# rewrite commit 353
-# rewrite commit 354
-# rewrite commit 355
-# rewrite commit 356
-# rewrite commit 357
-# rewrite commit 358
-# rewrite commit 359
-# rewrite commit 360

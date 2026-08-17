@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 WATCH_EXTENSIONS = {".md", ".html", ".css", ".js", ".yaml", ".yml", ".json", ".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp"}
 
-
 class SiteWatcher(FileSystemEventHandler):
     """Watches source directories and triggers rebuilds on changes."""
 
@@ -56,7 +55,6 @@ class SiteWatcher(FileSystemEventHandler):
             logger.debug("Watch event: %s", event)
             self._schedule_rebuild()
 
-
 class WatchService:
     """Manages filesystem observer for site development."""
 
@@ -89,15 +87,3 @@ class WatchService:
             logger.info("Stopping watcher...")
         finally:
             self.stop()
-# rewrite commit 361
-# rewrite commit 362
-# rewrite commit 363
-# rewrite commit 364
-# rewrite commit 365
-# rewrite commit 366
-# rewrite commit 367
-# rewrite commit 368
-# rewrite commit 369
-# rewrite commit 370
-# rewrite commit 371
-# rewrite commit 372

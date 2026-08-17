@@ -12,7 +12,6 @@ from ssg.config import load_config
 from ssg.exceptions import PluginError
 from ssg.plugins import PluginManager
 
-
 class TestPlugins:
     def test_page_rendered_plugin_can_transform_html(self, example_site: Path) -> None:
         plugin_dir = example_site / "plugins"
@@ -60,15 +59,3 @@ class TestPlugins:
 
         with pytest.raises(PluginError, match="Unknown plugin hook"):
             manager.dispatch("not_a_hook")
-# rewrite commit 493
-# rewrite commit 494
-# rewrite commit 495
-# rewrite commit 496
-# rewrite commit 497
-# rewrite commit 498
-# rewrite commit 499
-# rewrite commit 500
-# rewrite commit 501
-# rewrite commit 502
-# rewrite commit 503
-# rewrite commit 504
